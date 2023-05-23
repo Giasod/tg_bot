@@ -6,7 +6,6 @@ This is a Ruby on Rails application that runs a Telegram bot for transcribing vo
 ## Requirements
 * Ruby 2.7.2
 * Rails 7.0.4
-* SQLite 3 (for development and test environments)
 * A Telegram bot token
 * A Yandex OAuth token for the Speech-to-Text API
 
