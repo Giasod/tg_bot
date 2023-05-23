@@ -28,10 +28,12 @@ Install the dependencies:
 Create a .env file in the root directory of the project and add the following environment variables:
 
 `TELEGRAM_BOT_TOKEN=your_telegram_bot_token`
+
 `YANDEX_OAUTH_TOKEN=your_yandex_oauth_token`
+
 `YANDEX_FOLDER_ID=your_yandex_folder_id`
 
-Replace your_telegram_bot_token, your_yandex_oauth_token, and your_yandex_folder_id with your actual tokens and IDs.
+Replace them with your actual tokens and IDs.
 
 ## Running the Bot locally
 
