@@ -13,11 +13,11 @@ This is a Ruby on Rails application that runs a Telegram bot for transcribing vo
 ## Installation
 Clone the repository:
 
-`git clone https://github.com/yourusername/yourrepository.git`
+`git clone https://github.com/Giasod/tg_bot.git`
 
 Navigate to the project directory:
 
-`cd yourrepository`
+`cd tg_bot`
 
 Install the dependencies:
 
