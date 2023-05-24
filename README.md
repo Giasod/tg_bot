@@ -4,7 +4,7 @@
 This is a Ruby on Rails application that runs a Telegram bot for transcribing voice messages using the Yandex Speech-to-Text API.
 
 ## Requirements
-* Ruby 2.7.2
+* Ruby 3.2.0
 * Rails 7.0.4
 * A Telegram bot token
 * A Yandex OAuth token for the Speech-to-Text API
