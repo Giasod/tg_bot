@@ -24,6 +24,8 @@ class TelegramBot
       handle_voice(message, bot)
     else
       puts 'Received a non-voice message.'
+      bot.api.send_message(chat_id: message.chat.id,
+                           text: 'Sorry, I can only process voice messages. Please send me a voice message.')
     end
   rescue StandardError => e
     puts "Error handling message: #{e.message}"
@@ -36,9 +38,21 @@ class TelegramBot
     voice_file_url = "https://api.telegram.org/file/bot#{TOKEN}/#{file_path}"
     transcription = transcribe_voice(voice_file_url)
 
-    bot.api.send_message(chat_id: message.chat.id, text: transcription)
+    if transcription.nil? || transcription.empty?
+      bot.api.send_message(chat_id: message.chat.id, text: 'Sorry, I was unable to transcribe your voice message.')
+    else
+      bot.api.send_message(chat_id: message.chat.id, text: transcription)
+    end
+  rescue Telegram::Bot::Exceptions::ResponseError => e
+    if e.error_code == 400
+      bot.api.send_message(chat_id: message.chat.id,
+                           text: 'There was a problem processing your voice message. Please try again.')
+      puts "Telegram API has returned the error: #{e.message}"
+    else
+      puts "Error handling voice: #{e.message}"
+    end
   rescue StandardError => e
-    puts "Error handling voice: #{e.message}"
+    puts "Unexpected error handling voice: #{e.message}"
   end
 
   def self.transcribe_voice(voice_file_url)
@@ -56,8 +70,11 @@ class TelegramBot
     )
 
     JSON.parse(response.body)['result']
+  rescue RestClient::BadRequest
+    puts 'Error transcribing voice: 400 Bad Request'
+    nil
   rescue StandardError => e
-    puts "Error transcribing voice: #{e.message}"
+    puts "Unexpected error transcribing voice: #{e.message}"
     nil
   end
 
